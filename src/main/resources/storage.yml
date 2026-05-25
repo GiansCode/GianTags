@@ -1,0 +1,37 @@
+# ┌─────────────────────────────────────────────────┐
+# │                   GianTags                      │
+# │            Storage Configuration                │
+# └─────────────────────────────────────────────────┘
+
+storage:
+  # Storage backend: FLATFILE or MYSQL
+  type: FLATFILE
+
+  # Auto-save configuration (applies to all storage types)
+  auto-save:
+    enabled: true
+    # Interval in seconds between auto-saves of dirty (changed) player data
+    interval: 300
+
+  # ── Flatfile Settings ──────────────────────────────────────────────────
+  # Player data is stored at: /plugins/GianTags/data/<uuid>.yml
+  # No additional configuration required.
+
+  # ── MySQL Settings ────────────────────────────────────────────────────
+  mysql:
+    host: localhost
+    port: 3306
+    database: giantags
+    username: root
+    password: ''
+
+    # Table name prefix
+    table-prefix: 'gt_'
+
+    # HikariCP connection pool settings
+    pool:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      maximum-lifetime: 1800000
+      connection-timeout: 5000
+      keepalive-time: 0

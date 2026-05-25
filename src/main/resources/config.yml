@@ -1,0 +1,12 @@
+# ┌─────────────────────────────────────────────────┐
+# │                   GianTags                      │
+# │           Main Configuration File               │
+# └─────────────────────────────────────────────────┘
+
+# Aliases for the /tags GUI command.
+# ALL of these will be registered as full commands that open the tags GUI.
+# Changes take effect on server restart (or full reload).
+command-aliases:
+  - tags
+  - tag
+  - mytag

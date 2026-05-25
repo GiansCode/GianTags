@@ -1,0 +1,991 @@
+# ┌─────────────────────────────────────────────────┐
+# │                   GianTags                      │
+# │              Tags Configuration                 │
+# └─────────────────────────────────────────────────┘
+#
+# Tag identifier is the key (e.g. 'vip').
+# Permission required: giantags.tag.<identifier>
+#
+# ── Item Meta Fields ─────────────────────────────
+#  type            - Material name (e.g. DIAMOND)
+#  amount          - Stack size (default: 1)
+#  name            - MiniMessage display name
+#  lore            - List of MiniMessage lore lines
+#  selected-lore   - Lore override when this tag is the player's active tag
+#  enchantments    - List of "enchantment_key:level" pairs
+#  flags           - List of ItemFlag names (e.g. HIDE_ENCHANTS)
+#  custom-model-data - Integer custom model data (default: 0)
+#  glow            - Add glow effect without visible enchant (default: false)
+#  skull-texture   - Base64 skull texture (only for PLAYER_HEAD)
+#
+# ── Placeholders available in name/lore ──────────
+#  {tag}           - This tag's formatted string
+#  {tag_id}        - This tag's identifier
+#  {player}        - Player's name
+#  {player_tag}    - Player's currently active tag (or 'None')
+
+tags:
+
+  # ── Staff ─────────────────────────────────────────────────────────────────
+
+  'owner':
+    tag: '<gradient:#ff0000:#ff6600><bold>[Owner]</bold></gradient>'
+    description: '<red>The server owner.</red>'
+    position: 1
+    item:
+      type: NETHER_STAR
+      name: '<gradient:#ff0000:#ff6600><bold>[Owner]</bold></gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<red>The server owner.</red>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<red>The server owner.</red>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'admin':
+    tag: '<dark_red><bold>[Admin]</bold></dark_red>'
+    description: '<dark_red>Server administrator.</dark_red>'
+    position: 2
+    item:
+      type: BLAZE_ROD
+      name: '<dark_red><bold>[Admin]</bold></dark_red> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<dark_red>Server administrator.</dark_red>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<dark_red>Server administrator.</dark_red>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'mod':
+    tag: '<blue><bold>[Mod]</bold></blue>'
+    description: '<blue>Community moderator.</blue>'
+    position: 3
+    item:
+      type: IRON_SWORD
+      name: '<blue><bold>[Mod]</bold></blue> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<blue>Community moderator.</blue>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<blue>Community moderator.</blue>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      flags:
+        - HIDE_ENCHANTS
+      glow: true
+
+  'helper':
+    tag: '<green><bold>[Helper]</bold></green>'
+    description: '<green>A trusted community helper.</green>'
+    position: 4
+    item:
+      type: STICK
+      name: '<green><bold>[Helper]</bold></green> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<green>A trusted community helper.</green>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<green>A trusted community helper.</green>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      flags:
+        - HIDE_ENCHANTS
+
+  # ── Donor ─────────────────────────────────────────────────────────────────
+
+  'vip':
+    tag: '<gold>[VIP]</gold>'
+    description: '<yellow>A VIP supporter.</yellow>'
+    position: 10
+    item:
+      type: GOLD_INGOT
+      name: '<gold>[VIP]</gold> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<yellow>A VIP supporter.</yellow>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<yellow>A VIP supporter.</yellow>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+
+  'vip_plus':
+    tag: '<gold>[VIP<yellow>+</yellow>]</gold>'
+    description: '<gold>An elevated VIP supporter.</gold>'
+    position: 11
+    item:
+      type: GOLD_BLOCK
+      name: '<gold>[VIP<yellow>+</yellow>]</gold> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gold>An elevated VIP supporter.</gold>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gold>An elevated VIP supporter.</gold>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+
+  'mvp':
+    tag: '<aqua>[MVP]</aqua>'
+    description: '<aqua>An MVP super-supporter.</aqua>'
+    position: 12
+    item:
+      type: DIAMOND
+      name: '<aqua>[MVP]</aqua> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<aqua>An MVP super-supporter.</aqua>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<aqua>An MVP super-supporter.</aqua>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'mvp_plus':
+    tag: '<gradient:#00c8ff:#a855f7>[MVP<light_purple>+</light_purple>]</gradient>'
+    description: '<light_purple>The ultimate MVP tier.</light_purple>'
+    position: 13
+    item:
+      type: DIAMOND_BLOCK
+      name: '<gradient:#00c8ff:#a855f7>[MVP<light_purple>+</light_purple>]</gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<light_purple>The ultimate MVP tier.</light_purple>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<light_purple>The ultimate MVP tier.</light_purple>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  # ── Default / General ─────────────────────────────────────────────────────
+
+  'default':
+    tag: '<gray>[Default]</gray>'
+    description: '<gray>The default tag for everyone.</gray>'
+    position: 20
+    item:
+      type: PAPER
+      name: '<gray>[Default]</gray> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gray>The default tag.</gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gray>The default tag.</gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      flags:
+        - HIDE_ENCHANTS
+
+  'member':
+    tag: '<dark_green>[Member]</dark_green>'
+    description: '<dark_green>A proud community member.</dark_green>'
+    position: 21
+    item:
+      type: OAK_SAPLING
+      name: '<dark_green>[Member]</dark_green> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<dark_green>A proud community member.</dark_green>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<dark_green>A proud community member.</dark_green>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'veteran':
+    tag: '<dark_aqua>[Veteran]</dark_aqua>'
+    description: '<dark_aqua>Been here since day one.</dark_aqua>'
+    position: 22
+    item:
+      type: CLOCK
+      name: '<dark_aqua>[Veteran]</dark_aqua> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<dark_aqua>Been here since day one.</dark_aqua>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<dark_aqua>Been here since day one.</dark_aqua>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  # ── Fun / Quirky ──────────────────────────────────────────────────────────
+
+  'noob':
+    tag: '<white>[</white><red>Noob</red><white>]</white>'
+    description: '<gray>Just started. Or chose this ironically.</gray>'
+    position: 30
+    item:
+      type: WOODEN_SWORD
+      name: '<white>[</white><red>Noob</red><white>]</white> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gray>Just started. Or chose this ironically.</gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gray>Just started. Or chose this ironically.</gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'pro':
+    tag: '<gradient:#f7971e:#ffd200><bold>[Pro]</bold></gradient>'
+    description: '<yellow>Certified professional. Self-certified.</yellow>'
+    position: 31
+    item:
+      type: GOLDEN_SWORD
+      name: '<gradient:#f7971e:#ffd200><bold>[Pro]</bold></gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<yellow>Certified professional.</yellow>'
+        - '<dark_gray>Self-certified.</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<yellow>Certified professional.</yellow>'
+        - '<dark_gray>Self-certified.</dark_gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'gremlin':
+    tag: '<dark_green>[</dark_green><green>Gremlin</green><dark_green>]</dark_green>'
+    description: '<green>Chaotic, feral, and proud of it.</green>'
+    position: 32
+    item:
+      type: SLIME_BALL
+      name: '<dark_green>[</dark_green><green>Gremlin</green><dark_green>]</dark_green> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<green>Chaotic, feral, and proud of it.</green>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<green>Chaotic, feral, and proud of it.</green>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'gamer':
+    tag: '<gradient:#9b59b6:#3498db>[Gamer]</gradient>'
+    description: '<light_purple>No life. All grind.</light_purple>'
+    position: 33
+    item:
+      type: COMPARATOR
+      name: '<gradient:#9b59b6:#3498db>[Gamer]</gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<light_purple>No life. All grind.</light_purple>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<light_purple>No life. All grind.</light_purple>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'menace':
+    tag: '<red>[</red><dark_red>Menace</dark_red><red>]</red>'
+    description: '<red>A walking disaster. Feared by many.</red>'
+    position: 34
+    item:
+      type: TNT
+      name: '<red>[</red><dark_red>Menace</dark_red><red>]</red> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<red>A walking disaster.</red>'
+        - '<dark_gray>Feared by many.</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<red>A walking disaster.</red>'
+        - '<dark_gray>Feared by many.</dark_gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'goblin':
+    tag: '<dark_green>[Goblin]</dark_green>'
+    description: '<dark_green>Hoards items. Has no chill.</dark_green>'
+    position: 35
+    item:
+      type: CHEST
+      name: '<dark_green>[Goblin]</dark_green> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<dark_green>Hoards items. Has no chill.</dark_green>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<dark_green>Hoards items. Has no chill.</dark_green>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'clown':
+    tag: '<yellow>[</yellow><red>Clown</red><yellow>]</yellow>'
+    description: '<yellow>Honk honk.</yellow>'
+    position: 36
+    item:
+      type: BELL
+      name: '<yellow>[</yellow><red>Clown</red><yellow>]</yellow> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<yellow>Honk honk.</yellow>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<yellow>Honk honk.</yellow>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'rat':
+    tag: '<gray>[Rat]</gray>'
+    description: '<gray>Someone had to say it.</gray>'
+    position: 37
+    item:
+      type: RAW_RABBIT
+      name: '<gray>[Rat]</gray> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gray>Someone had to say it.</gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gray>Someone had to say it.</gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'bozo':
+    tag: '<red>[</red><white>Bozo</white><red>]</red>'
+    description: '<gray>An absolute bozo. Legendary status.</gray>'
+    position: 38
+    item:
+      type: PUMPKIN
+      name: '<red>[</red><white>Bozo</white><red>]</red> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gray>An absolute bozo.</gray>'
+        - '<dark_gray>Legendary status.</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gray>An absolute bozo.</gray>'
+        - '<dark_gray>Legendary status.</dark_gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'potato':
+    tag: '<yellow>[Potato]</yellow>'
+    description: '<yellow>Not a person. Just a potato.</yellow>'
+    position: 39
+    item:
+      type: POTATO
+      name: '<yellow>[Potato]</yellow> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<yellow>Not a person. Just a potato.</yellow>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<yellow>Not a person. Just a potato.</yellow>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  # ── Skill / Playstyle ─────────────────────────────────────────────────────
+
+  'pvp':
+    tag: '<red>[</red><dark_red>⚔ PvP</dark_red><red>]</red>'
+    description: '<red>Built for combat. Will fight for fun.</red>'
+    position: 50
+    item:
+      type: IRON_SWORD
+      name: '<red>[</red><dark_red>⚔ PvP</dark_red><red>]</red> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<red>Built for combat.</red>'
+        - '<dark_gray>Will fight for fun.</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<red>Built for combat.</red>'
+        - '<dark_gray>Will fight for fun.</dark_gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'builder':
+    tag: '<gold>[</gold><yellow>Builder</yellow><gold>]</gold>'
+    description: '<yellow>Turns dirt into dreams.</yellow>'
+    position: 51
+    item:
+      type: BRICKS
+      name: '<gold>[</gold><yellow>Builder</yellow><gold>]</gold> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<yellow>Turns dirt into dreams.</yellow>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<yellow>Turns dirt into dreams.</yellow>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'farmer':
+    tag: '<green>[</green><dark_green>Farmer</dark_green><green>]</green>'
+    description: '<green>Wheat whisperer. Seed savant.</green>'
+    position: 52
+    item:
+      type: WHEAT
+      name: '<green>[</green><dark_green>Farmer</dark_green><green>]</green> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<green>Wheat whisperer.</green>'
+        - '<dark_gray>Seed savant.</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<green>Wheat whisperer.</green>'
+        - '<dark_gray>Seed savant.</dark_gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'miner':
+    tag: '<gray>[</gray><dark_gray>⛏ Miner</dark_gray><gray>]</gray>'
+    description: '<gray>Y=-58. Every day. No exceptions.</gray>'
+    position: 53
+    item:
+      type: IRON_PICKAXE
+      name: '<gray>[</gray><dark_gray>⛏ Miner</dark_gray><gray>]</gray> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gray>Y=-58. Every day. No exceptions.</gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gray>Y=-58. Every day. No exceptions.</gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'explorer':
+    tag: '<aqua>[</aqua><dark_aqua>Explorer</dark_aqua><aqua>]</aqua>'
+    description: '<aqua>Has been everywhere. Twice.</aqua>'
+    position: 54
+    item:
+      type: COMPASS
+      name: '<aqua>[</aqua><dark_aqua>Explorer</dark_aqua><aqua>]</aqua> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<aqua>Has been everywhere. Twice.</aqua>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<aqua>Has been everywhere. Twice.</aqua>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'redstone':
+    tag: '<red>[</red><dark_red>Redstone</dark_red><red>]</red>'
+    description: '<red>15,000 redstone later: it still does not work.</red>'
+    position: 55
+    item:
+      type: REDSTONE
+      name: '<red>[</red><dark_red>Redstone</dark_red><red>]</red> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<red>15,000 redstone later:</red>'
+        - '<dark_gray>it still does not work.</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<red>15,000 redstone later:</red>'
+        - '<dark_gray>it still does not work.</dark_gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'trader':
+    tag: '<gold>[</gold><yellow>Trader</yellow><gold>]</gold>'
+    description: '<yellow>Will sell you dirt for a diamond.</yellow>'
+    position: 56
+    item:
+      type: EMERALD
+      name: '<gold>[</gold><yellow>Trader</yellow><gold>]</gold> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<yellow>Will sell you dirt for a diamond.</yellow>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<yellow>Will sell you dirt for a diamond.</yellow>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  # ── Personality ───────────────────────────────────────────────────────────
+
+  'legend':
+    tag: '<gradient:#f7971e:#ffd200><bold>[Legend]</bold></gradient>'
+    description: '<gold>The legend. The myth. The player.</gold>'
+    position: 60
+    item:
+      type: TOTEM_OF_UNDYING
+      name: '<gradient:#f7971e:#ffd200><bold>[Legend]</bold></gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gold>The legend.</gold>'
+        - '<yellow>The myth. The player.</yellow>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gold>The legend.</gold>'
+        - '<yellow>The myth. The player.</yellow>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'ghost':
+    tag: '<white>[</white><gray>Ghost</gray><white>]</white>'
+    description: '<gray>Silent. Watching. Always lurking.</gray>'
+    position: 61
+    item:
+      type: SOUL_SAND
+      name: '<white>[</white><gray>Ghost</gray><white>]</white> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gray>Silent. Watching. Always lurking.</gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gray>Silent. Watching. Always lurking.</gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'chaos':
+    tag: '<gradient:#ff0000:#ff00ff><bold>[Chaos]</bold></gradient>'
+    description: '<light_purple>Thrives on disorder. Do not invite.</light_purple>'
+    position: 62
+    item:
+      type: FIRE_CHARGE
+      name: '<gradient:#ff0000:#ff00ff><bold>[Chaos]</bold></gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<light_purple>Thrives on disorder.</light_purple>'
+        - '<dark_gray>Do not invite.</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<light_purple>Thrives on disorder.</light_purple>'
+        - '<dark_gray>Do not invite.</dark_gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'chill':
+    tag: '<aqua>[Chill]</aqua>'
+    description: '<aqua>Unbothered. Moisturised. Thriving.</aqua>'
+    position: 63
+    item:
+      type: LIGHT_BLUE_STAINED_GLASS
+      name: '<aqua>[Chill]</aqua> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<aqua>Unbothered. Moisturised. Thriving.</aqua>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<aqua>Unbothered. Moisturised. Thriving.</aqua>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'toxic':
+    tag: '<dark_green>[</dark_green><green>☠ Toxic</green><dark_green>]</dark_green>'
+    description: '<green>Handle with caution.</green>'
+    position: 64
+    item:
+      type: POISONOUS_POTATO
+      name: '<dark_green>[</dark_green><green>☠ Toxic</green><dark_green>]</dark_green> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<green>Handle with caution.</green>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<green>Handle with caution.</green>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'goat':
+    tag: '<white>[</white><gray>🐐 GOAT</gray><white>]</white>'
+    description: '<white>Greatest Of All Time.</white>'
+    position: 65
+    item:
+      type: GOAT_HORN
+      name: '<white>[</white><gray>🐐 GOAT</gray><white>]</white> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<white>Greatest Of All Time.</white>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<white>Greatest Of All Time.</white>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'nerd':
+    tag: '<blue>[</blue><aqua>Nerd</aqua><blue>]</blue>'
+    description: '<aqua>Reads the wiki. Memorises the wiki. IS the wiki.</aqua>'
+    position: 66
+    item:
+      type: BOOKSHELF
+      name: '<blue>[</blue><aqua>Nerd</aqua><blue>]</blue> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<aqua>Reads the wiki.</aqua>'
+        - '<blue>Memorises the wiki. IS the wiki.</blue>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<aqua>Reads the wiki.</aqua>'
+        - '<blue>Memorises the wiki. IS the wiki.</blue>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  # ── Cosmetic / Aesthetic ──────────────────────────────────────────────────
+
+  'rainbow':
+    tag: '<gradient:#ff0000:#ff7700:#ffff00:#00ff00:#0000ff:#8b00ff>[Rainbow]</gradient>'
+    description: '<gradient:#ff0000:#ff7700:#ffff00:#00ff00:#0000ff:#8b00ff>Taste the rainbow.</gradient>'
+    position: 70
+    item:
+      type: PINK_DYE
+      name: '<gradient:#ff0000:#ff7700:#ffff00:#00ff00:#0000ff:#8b00ff>[Rainbow]</gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gradient:#ff0000:#ff7700:#ffff00:#00ff00:#0000ff:#8b00ff>Taste the rainbow.</gradient>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gradient:#ff0000:#ff7700:#ffff00:#00ff00:#0000ff:#8b00ff>Taste the rainbow.</gradient>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'galaxy':
+    tag: '<gradient:#0f0c29:#302b63:#24243e>[Galaxy]</gradient>'
+    description: '<dark_purple>Lost in space. Found in style.</dark_purple>'
+    position: 71
+    item:
+      type: AMETHYST_SHARD
+      name: '<gradient:#a78bfa:#818cf8>[Galaxy]</gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<dark_purple>Lost in space.</dark_purple>'
+        - '<light_purple>Found in style.</light_purple>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<dark_purple>Lost in space.</dark_purple>'
+        - '<light_purple>Found in style.</light_purple>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'fire':
+    tag: '<gradient:#ff4500:#ff8c00>🔥 [Fire]</gradient>'
+    description: '<red>Always burning. Never cooling down.</red>'
+    position: 72
+    item:
+      type: BLAZE_POWDER
+      name: '<gradient:#ff4500:#ff8c00>🔥 [Fire]</gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<red>Always burning.</red>'
+        - '<dark_gray>Never cooling down.</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<red>Always burning.</red>'
+        - '<dark_gray>Never cooling down.</dark_gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'ice':
+    tag: '<gradient:#a8edea:#fed6e3>[❄ Ice]</gradient>'
+    description: '<aqua>Frosty attitude. Icy stare.</aqua>'
+    position: 73
+    item:
+      type: PACKED_ICE
+      name: '<gradient:#a8edea:#fed6e3>[❄ Ice]</gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<aqua>Frosty attitude. Icy stare.</aqua>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<aqua>Frosty attitude. Icy stare.</aqua>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'demon':
+    tag: '<dark_red>[</dark_red><red>👿 Demon</red><dark_red>]</dark_red>'
+    description: '<red>Straight from the Nether.</red>'
+    position: 74
+    item:
+      type: WITHER_SKELETON_SKULL
+      name: '<dark_red>[</dark_red><red>👿 Demon</red><dark_red>]</dark_red> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<red>Straight from the Nether.</red>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<red>Straight from the Nether.</red>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'angel':
+    tag: '<white>[</white><yellow>✨ Angel</yellow><white>]</white>'
+    description: '<yellow>Pure of heart. Suspicious of soul.</yellow>'
+    position: 75
+    item:
+      type: FEATHER
+      name: '<white>[</white><yellow>✨ Angel</yellow><white>]</white> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<yellow>Pure of heart.</yellow>'
+        - '<dark_gray>Suspicious of soul.</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<yellow>Pure of heart.</yellow>'
+        - '<dark_gray>Suspicious of soul.</dark_gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'void':
+    tag: '<dark_gray>[</dark_gray><black>Void</black><dark_gray>]</dark_gray>'
+    description: '<dark_gray>Consumed by the abyss. Cozy in here.</dark_gray>'
+    position: 76
+    item:
+      type: BLACK_CONCRETE
+      name: '<dark_gray>[</dark_gray><black>Void</black><dark_gray>]</dark_gray> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<dark_gray>Consumed by the abyss.</dark_gray>'
+        - '<gray>Cozy in here.</gray>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<dark_gray>Consumed by the abyss.</dark_gray>'
+        - '<gray>Cozy in here.</gray>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+
+  'cursed':
+    tag: '<dark_purple>[</dark_purple><light_purple>☠ Cursed</light_purple><dark_purple>]</dark_purple>'
+    description: '<light_purple>Touched by something unspeakable.</light_purple>'
+    position: 77
+    item:
+      type: FERMENTED_SPIDER_EYE
+      name: '<dark_purple>[</dark_purple><light_purple>☠ Cursed</light_purple><dark_purple>]</dark_purple> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<light_purple>Touched by something unspeakable.</light_purple>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<light_purple>Touched by something unspeakable.</light_purple>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  # ── Special / Rare ────────────────────────────────────────────────────────
+
+  'god':
+    tag: '<gradient:#f6d365:#fda085><bold>[God]</bold></gradient>'
+    description: '<gold>Ascended. Untouchable. Humble about it.</gold>'
+    position: 90
+    item:
+      type: END_CRYSTAL
+      name: '<gradient:#f6d365:#fda085><bold>[God]</bold></gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gold>Ascended. Untouchable.</gold>'
+        - '<yellow>Humble about it.</yellow>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gold>Ascended. Untouchable.</gold>'
+        - '<yellow>Humble about it.</yellow>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'the_one':
+    tag: '<gradient:#ffffff:#ffd700><bold>[The One]</bold></gradient>'
+    description: '<white>There can only be one.</white>'
+    position: 91
+    item:
+      type: DRAGON_EGG
+      name: '<gradient:#ffffff:#ffd700><bold>[The One]</bold></gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<white>There can only be one.</white>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<white>There can only be one.</white>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'staff_pick':
+    tag: '<gradient:#11998e:#38ef7d>[⭐ Staff Pick]</gradient>'
+    description: '<green>Handpicked by the team. Lucky you.</green>'
+    position: 92
+    item:
+      type: EMERALD_BLOCK
+      name: '<gradient:#11998e:#38ef7d>[⭐ Staff Pick]</gradient> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<green>Handpicked by the team.</green>'
+        - '<dark_green>Lucky you.</dark_green>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<green>Handpicked by the team.</green>'
+        - '<dark_green>Lucky you.</dark_green>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'og':
+    tag: '<gold>[</gold><yellow>OG</yellow><gold>]</gold>'
+    description: '<gold>Original. Irreplaceable. Nostalgic.</gold>'
+    position: 93
+    item:
+      type: MUSIC_DISC_13
+      name: '<gold>[</gold><yellow>OG</yellow><gold>]</gold> <dark_gray>Tag</dark_gray>'
+      lore:
+        - '<gold>Original. Irreplaceable. Nostalgic.</gold>'
+        - ''
+        - '<yellow>➜ <white>Click to select</white></yellow>'
+      selected-lore:
+        - '<gold>Original. Irreplaceable. Nostalgic.</gold>'
+        - ''
+        - '<green>✔ <white>Currently active</white></green>'
+        - ''
+        - '<red>✖ <white>Click to remove</white></red>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS

@@ -1,0 +1,72 @@
+name: GianTags
+version: '${project.version}'
+main: gg.gianluca.giantags.GianTags
+bootstrapper: gg.gianluca.giantags.GianTagsBootstrapper
+loader: gg.gianluca.giantags.GianTagsLoader
+api-version: '1.21'
+description: Fully customizable, permission-based player tags with animated GUI
+authors:
+  - GianLuca
+website: https://github.com/gianluca
+
+dependencies:
+  server:
+    PlaceholderAPI:
+      load: BEFORE
+      required: false
+      join-classpath: true
+
+permissions:
+  giantags.*:
+    description: "Grants all GianTags permissions."
+    default: op
+    children:
+      giantags.gui: true
+      giantags.tag.*: true
+      giantags.commands.*: true
+
+  giantags.gui:
+    description: "Allows opening the tags GUI."
+    default: true
+
+  giantags.tag.*:
+    description: "Grants access to all tags."
+    default: op
+
+  giantags.commands.*:
+    description: "Grants all /giantags sub-commands."
+    default: op
+    children:
+      giantags.commands.list: true
+      giantags.commands.list.others: true
+      giantags.commands.set: true
+      giantags.commands.set.bypass: true
+      giantags.commands.remove: true
+      giantags.commands.get: true
+      giantags.commands.get.others: true
+      giantags.commands.reload: true
+
+  giantags.commands.list:
+    description: "Allows /giantags list (self)."
+    default: op
+  giantags.commands.list.others:
+    description: "Allows /giantags list <player>."
+    default: op
+  giantags.commands.set:
+    description: "Allows /giantags set."
+    default: op
+  giantags.commands.set.bypass:
+    description: "Allows --ignorePermission flag."
+    default: op
+  giantags.commands.remove:
+    description: "Allows /giantags remove|reset."
+    default: op
+  giantags.commands.get:
+    description: "Allows /giantags get (self)."
+    default: op
+  giantags.commands.get.others:
+    description: "Allows /giantags get <player>."
+    default: op
+  giantags.commands.reload:
+    description: "Allows /giantags reload."
+    default: op

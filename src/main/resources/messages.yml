@@ -1,0 +1,44 @@
+# ┌─────────────────────────────────────────────────┐
+# │                   GianTags                      │
+# │           Messages Configuration                │
+# └─────────────────────────────────────────────────┘
+# All messages support full MiniMessage formatting.
+# Use {prefix} to insert the plugin prefix defined below.
+
+messages:
+  prefix: '<dark_gray>[<gold>GianTags</gold>]</dark_gray> '
+
+  # ── Tag Selection ────────────────────────────────────────────────────
+  tag-selected: '{prefix}<green>You selected the tag <white>{tag}</white><green>.'
+  tag-cleared: '{prefix}<yellow>Your tag has been removed.'
+
+  # ── Admin Commands ───────────────────────────────────────────────────
+  tag-set: '{prefix}<green>Set <white>{player}</white><green>''s tag to <white>{tag}</white><green>.'
+  tag-removed: '{prefix}<yellow>Removed <white>{player}</white><yellow>''s tag.'
+  tag-already-active: '{prefix}<yellow>That tag is already your active tag.'
+
+  # ── Errors ───────────────────────────────────────────────────────────
+  no-permission: '{prefix}<red>You don''t have permission to do this.'
+  no-permission-tag: '{prefix}<red><white>{player}</white><red> does not have permission for the tag <white>{tag}</white><red>.'
+  player-not-found: '{prefix}<red>Player <white>{player}</white><red> was not found.'
+  tag-not-found: '{prefix}<red>Tag <white>{tag}</white><red> does not exist.'
+  invalid-usage: '{prefix}<red>Usage: <white>{usage}</white>'
+  players-only: '{prefix}<red>This command can only be used by players.'
+  console-only: '{prefix}<red>This command can only be used from console.'
+
+  # ── List Command ─────────────────────────────────────────────────────
+  list-header: '{prefix}<green>Available tags <dark_gray>(<gray>{count}</gray>)</dark_gray><green>:'
+  list-header-player: '{prefix}<green>Tags for <white>{player}</white><green> <dark_gray>(<gray>{count}</gray>)</dark_gray><green>:'
+  list-entry: '  <dark_gray>│ <gray>{tag_id} <dark_gray>→ <reset>{tag}'
+  list-entry-active: '  <dark_gray>│ <gray>{tag_id} <dark_gray>→ <reset>{tag} <green><bold>[ACTIVE]</bold></green>'
+  list-empty: '{prefix}<yellow>No tags found.'
+
+  # ── Get Command ──────────────────────────────────────────────────────
+  current-tag-self: '{prefix}<green>Your current tag is <white>{tag}</white><green>.'
+  current-tag-other: '{prefix}<green><white>{player}</white><green>''s current tag is <white>{tag}</white><green>.'
+  no-current-tag-self: '{prefix}<yellow>You have no active tag.'
+  no-current-tag-other: '{prefix}<yellow><white>{player}</white> has no active tag.'
+
+  # ── Reload ───────────────────────────────────────────────────────────
+  reload-success: '{prefix}<green>Plugin reloaded successfully.'
+  reload-failed: '{prefix}<red>Reload failed — check console for errors.'

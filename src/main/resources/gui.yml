@@ -1,0 +1,104 @@
+# ┌─────────────────────────────────────────────────┐
+# │                   GianTags                      │
+# │              GUI Configuration                  │
+# └─────────────────────────────────────────────────┘
+#
+# ── Placeholders available in item name/lore ─────
+#  {player}        - Player's name
+#  {player_tag}    - Player's currently active formatted tag (or 'None')
+#  {player_tag_id} - Player's currently active tag ID (or 'none')
+#  {page}          - Current page number
+#  {pages}         - Total number of pages
+#  {tag_count}     - Number of tags available to the player
+
+gui:
+  # MiniMessage title for the GUI
+  title: '<dark_gray>✦ <gold>Tags</gold> ✦</dark_gray>'
+
+  # Total number of rows (1-6). The last row is the navigation row.
+  rows: 6
+
+  # How many tag slots per page. Should be rows*9 minus nav slots.
+  # For 6 rows: 45 (all rows except the last navigation row)
+  page-size: 45
+
+  # How often the GUI refreshes in ticks (20 ticks = 1 second)
+  update-interval: 10
+
+  # Filler item for empty GUI slots
+  filler:
+    enabled: true
+    item:
+      type: BLACK_STAINED_GLASS_PANE
+      name: ' '
+
+  # ── Navigation Items ─────────────────────────────────────────────────────
+  # Slots are 0-indexed from top-left. For a 6-row GUI: slots 45-53 = row 6.
+
+  navigation:
+    previous-page:
+      slot: 48
+      item:
+        type: ARROW
+        name: '<yellow>◀ <white>Previous Page</white></yellow>'
+        lore:
+          - ''
+          - '<gray>Page <white>{page}</white> of <white>{pages}</white></gray>'
+          - ''
+          - '<yellow>Click to go back</yellow>'
+
+    next-page:
+      slot: 50
+      item:
+        type: ARROW
+        name: '<white>Next Page</white> <yellow>▶</yellow>'
+        lore:
+          - ''
+          - '<gray>Page <white>{page}</white> of <white>{pages}</white></gray>'
+          - ''
+          - '<yellow>Click to continue</yellow>'
+
+    close:
+      slot: 49
+      item:
+        type: BARRIER
+        name: '<red>✖ <white>Close Menu</white></red>'
+        lore:
+          - ''
+          - '<gray>Click to close the tags menu</gray>'
+
+    # Current tag display. Shows the player's active tag.
+    # Two states: has-tag (active tag) and no-tag (no active tag).
+    current-tag:
+      slot: 45
+      has-tag:
+        type: PLAYER_HEAD
+        name: '<yellow>Current Tag</yellow>'
+        lore:
+          - '<gray>Your active tag:</gray>'
+          - ' <white>{player_tag}</white>'
+          - ''
+          - '<red>✖ <gray>Click to remove your tag</gray></red>'
+        glow: true
+        flags:
+          - HIDE_ENCHANTS
+      no-tag:
+        type: PAPER
+        name: '<yellow>Current Tag</yellow>'
+        lore:
+          - '<gray>You have no active tag.</gray>'
+          - ''
+          - '<yellow>Select a tag from the menu!</yellow>'
+
+    # Optional: extra filler slots in the navigation row (decorative)
+    nav-filler:
+      enabled: true
+      slots:
+        - 46
+        - 47
+        - 51
+        - 52
+        - 53
+      item:
+        type: GRAY_STAINED_GLASS_PANE
+        name: ' '
