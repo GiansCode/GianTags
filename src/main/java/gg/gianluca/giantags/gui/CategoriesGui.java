@@ -4,13 +4,12 @@ import dev.triumphteam.gui.guis.Gui;
 import dev.triumphteam.gui.guis.GuiItem;
 import dev.triumphteam.gui.guis.PaginatedGui;
 import gg.gianluca.giantags.api.event.TagClearEvent;
-import gg.gianluca.giantags.api.event.TagSelectEvent;
 import gg.gianluca.giantags.api.model.Tag;
 import gg.gianluca.giantags.config.CategoriesConfig;
 import gg.gianluca.giantags.config.GuiConfig;
 import gg.gianluca.giantags.config.MessagesConfig;
+import gg.gianluca.giantags.config.TagsConfig;
 import gg.gianluca.giantags.storage.StorageManager;
-import gg.gianluca.giantags.util.ItemBuilder;
 import gg.gianluca.giantags.util.TextUtil;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
@@ -19,40 +18,31 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
- * Factory + update utility for the player's tags {@link PaginatedGui}.
+ * Factory + update utility for the categories selection {@link PaginatedGui}.
  *
- * <p>Supports three modes:
- * <ul>
- *   <li>{@code categoryId == null} — shows all tags (used by {@code /tags all})</li>
- *   <li>{@code categoryId != null} — shows only tags in that category and adds a
- *       "back to categories" button in the nav row</li>
- * </ul>
+ * <p>Opened when a player runs {@code /tags} and categories are enabled.
+ * Each item represents a category; clicking it opens the per-category tags GUI.
+ * The navigation row always shows the player's current-tag display.
  */
-public final class TagsGui {
+public final class CategoriesGui {
 
-    private TagsGui() {}
+    private CategoriesGui() {}
 
     /**
-     * Creates, populates, and opens the tags GUI for the given player.
-     *
-     * @param categoryId when non-null, only tags belonging to this category are shown
-     *                   and a back-to-categories button is injected into the nav row
+     * Creates, populates, and opens the categories GUI for the given player.
      */
     @NotNull
     public static PaginatedGui create(
             @NotNull JavaPlugin plugin,
             @NotNull Player player,
-            @NotNull GuiManager guiManager,
-            @Nullable String categoryId
+            @NotNull GuiManager guiManager
     ) {
-        GuiConfig cfg = getGuiConfig(plugin);
+        CategoriesConfig cfg = getCategoriesConfig(plugin);
 
-        Component title = resolveTitle(plugin, categoryId);
+        Component title = TextUtil.parse(cfg.getTitle());
         PaginatedGui gui = Gui.paginated()
                 .title(title)
                 .rows(cfg.getRows())
@@ -60,8 +50,8 @@ public final class TagsGui {
                 .disableAllInteractions()
                 .create();
 
-        populateTagItems(plugin, player, gui, guiManager, categoryId);
-        populateNavItems(plugin, player, gui, guiManager, categoryId);
+        populateCategoryItems(plugin, player, gui, guiManager);
+        populateNavItems(plugin, player, gui, guiManager);
 
         return gui;
     }
@@ -75,128 +65,85 @@ public final class TagsGui {
             @NotNull Player player,
             @NotNull PaginatedGui gui
     ) {
-        GuiConfig cfg = getGuiConfig(plugin);
+        CategoriesConfig cfg = getCategoriesConfig(plugin);
         StorageManager storage = getStorageManager(plugin);
 
         String currentTagId = storage.getPlayerData(player.getUniqueId())
                 .flatMap(d -> Optional.ofNullable(d.getTagId()))
                 .orElse(null);
         String playerTag = currentTagId != null ? getTagRaw(plugin, currentTagId) : "None";
+        String page = String.valueOf(gui.getCurrentPageNum());
+        String pages = String.valueOf(gui.getPagesNum());
 
         // Current-tag display
         GuiConfig.CurrentTagItem ctCfg = cfg.getCurrentTag();
-        ItemStack ctItem = buildCurrentTagItem(ctCfg, player, currentTagId, playerTag,
-                String.valueOf(gui.getCurrentPageNum()),
-                String.valueOf(gui.getPagesNum()));
+        ItemStack ctItem = buildCurrentTagItem(ctCfg, player, currentTagId, playerTag, page, pages);
         gui.updateItem(ctCfg.slot(), ctItem);
 
-        // Page indicators on prev/next buttons
-        String page = String.valueOf(gui.getCurrentPageNum());
-        String pages = String.valueOf(gui.getPagesNum());
-        String playerTagId = currentTagId != null ? currentTagId : "none";
-
+        // Prev / Next page indicators
         gui.updateItem(cfg.getPrevPage().slot(),
                 cfg.getPrevPage().item().buildPlain(
                         "player", player.getName(), "player_tag", playerTag,
-                        "player_tag_id", playerTagId, "page", page, "pages", pages));
+                        "player_tag_id", currentTagId != null ? currentTagId : "none",
+                        "page", page, "pages", pages));
         gui.updateItem(cfg.getNextPage().slot(),
                 cfg.getNextPage().item().buildPlain(
                         "player", player.getName(), "player_tag", playerTag,
-                        "player_tag_id", playerTagId, "page", page, "pages", pages));
+                        "player_tag_id", currentTagId != null ? currentTagId : "none",
+                        "page", page, "pages", pages));
     }
 
     // ── Private helpers ───────────────────────────────────────────────────────
 
-    private static void populateTagItems(
+    private static void populateCategoryItems(
             @NotNull JavaPlugin plugin,
             @NotNull Player player,
             @NotNull PaginatedGui gui,
-            @NotNull GuiManager guiManager,
-            @Nullable String categoryId
+            @NotNull GuiManager guiManager
     ) {
+        CategoriesConfig cfg = getCategoriesConfig(plugin);
+        TagsConfig tagsConfig = getTagsConfig(plugin);
         StorageManager storage = getStorageManager(plugin);
+
         String currentTagId = storage.getPlayerData(player.getUniqueId())
                 .flatMap(d -> Optional.ofNullable(d.getTagId()))
                 .orElse(null);
+        String playerTag = currentTagId != null ? getTagRaw(plugin, currentTagId) : "None";
+        String playerTagId = currentTagId != null ? currentTagId : "none";
 
-        Stream<Tag> stream = getTagsConfig(plugin).getTags().values().stream()
-                .filter(tag -> player.hasPermission(tag.getPermission()));
+        for (CategoriesConfig.Category category : cfg.getCategories()) {
+            long tagCount = tagsConfig.getTags().values().stream()
+                    .filter(t -> category.id().equals(t.getCategory()))
+                    .filter(t -> player.hasPermission(t.getPermission()))
+                    .count();
 
-        if (categoryId != null) {
-            stream = stream.filter(tag -> categoryId.equals(tag.getCategory()));
-        }
+            ItemStack item = category.item().buildPlain(
+                    "category_name", category.name(),
+                    "tag_count", String.valueOf(tagCount),
+                    "player", player.getName(),
+                    "player_tag", playerTag,
+                    "player_tag_id", playerTagId
+            );
 
-        List<Tag> tags = stream
-                .sorted(java.util.Comparator.comparingInt(Tag::getPosition))
-                .toList();
-
-        for (Tag tag : tags) {
-            boolean selected = tag.getId().equals(currentTagId);
-            ItemStack item = tag.buildGuiItem(player, selected);
-
+            final String categoryId = category.id();
             gui.addItem(new GuiItem(item, event -> {
                 if (!(event.getWhoClicked() instanceof Player clicker)) return;
-                handleTagClick(plugin, clicker, tag, guiManager);
+                guiManager.openTagsGuiForCategory(clicker, categoryId);
             }));
         }
 
-        // Fill remaining empty slots on the last page with the background item.
-        GuiConfig cfg = getGuiConfig(plugin);
+        // Fill remaining empty slots on the last page
         if (cfg.isFillerEnabled()) {
-            int tagCount = tags.size();
-            int pageSize = cfg.getPageSize();
-            int emptySlots = tagCount == 0
-                    ? pageSize
-                    : (tagCount % pageSize == 0 ? 0 : pageSize - (tagCount % pageSize));
-            if (emptySlots > 0) {
-                ItemStack fillerStack = cfg.getFillerItem().buildPlain();
-                GuiItem filler = new GuiItem(fillerStack);
-                for (int i = 0; i < emptySlots; i++) {
-                    gui.addItem(filler);
-                }
+            int catCount = cfg.getCategories().size();
+            int ps = cfg.getPageSize();
+            int empty = catCount == 0
+                    ? ps
+                    : (catCount % ps == 0 ? 0 : ps - (catCount % ps));
+            if (empty > 0) {
+                ItemStack filler = cfg.getFillerItem().buildPlain();
+                GuiItem fillerItem = new GuiItem(filler);
+                for (int i = 0; i < empty; i++) gui.addItem(fillerItem);
             }
-        }
-    }
-
-    private static void handleTagClick(
-            @NotNull JavaPlugin plugin,
-            @NotNull Player player,
-            @NotNull Tag tag,
-            @NotNull GuiManager guiManager
-    ) {
-        StorageManager storage = getStorageManager(plugin);
-        MessagesConfig msg = getMessagesConfig(plugin);
-
-        String currentId = storage.getPlayerData(player.getUniqueId())
-                .flatMap(d -> Optional.ofNullable(d.getTagId()))
-                .orElse(null);
-        boolean isSelected = tag.getId().equals(currentId);
-
-        if (isSelected) {
-            TagClearEvent clearEvent = new TagClearEvent(player, tag);
-            plugin.getServer().getPluginManager().callEvent(clearEvent);
-            if (clearEvent.isCancelled()) return;
-
-            storage.clearTag(player.getUniqueId());
-            player.sendMessage(msg.get("tag-cleared"));
-        } else {
-            Tag previousTag = currentId != null ? getTagsConfig(plugin).getTags().get(currentId) : null;
-            TagSelectEvent selectEvent = new TagSelectEvent(player, tag, previousTag);
-            plugin.getServer().getPluginManager().callEvent(selectEvent);
-            if (selectEvent.isCancelled()) return;
-
-            storage.setTagId(player.getUniqueId(), tag.getId());
-            player.sendMessage(msg.get("tag-selected", "tag", tag.getRawTag()));
-        }
-
-        // Refresh the GUI in-place so the player's current page is preserved.
-        PaginatedGui gui = guiManager.getOpenGui(player.getUniqueId());
-        if (gui != null) {
-            String openCategoryId = guiManager.getOpenGuiCategoryId(player.getUniqueId());
-            gui.clearPageItems(false);
-            populateTagItems(plugin, player, gui, guiManager, openCategoryId);
-            gui.update();
-            updateNavItems(plugin, player, gui);
         }
     }
 
@@ -204,10 +151,9 @@ public final class TagsGui {
             @NotNull JavaPlugin plugin,
             @NotNull Player player,
             @NotNull PaginatedGui gui,
-            @NotNull GuiManager guiManager,
-            @Nullable String categoryId
+            @NotNull GuiManager guiManager
     ) {
-        GuiConfig cfg = getGuiConfig(plugin);
+        CategoriesConfig cfg = getCategoriesConfig(plugin);
         StorageManager storage = getStorageManager(plugin);
 
         String currentTagId = storage.getPlayerData(player.getUniqueId())
@@ -241,7 +187,7 @@ public final class TagsGui {
                 "player", player.getName(), "player_tag", playerTag);
         gui.setItem(cfg.getClose().slot(), new GuiItem(closeItem, e -> player.closeInventory()));
 
-        // Current-tag display — clicking clears the active tag
+        // Current-tag display — clicking clears the active tag in-place
         GuiConfig.CurrentTagItem ctCfg = cfg.getCurrentTag();
         ItemStack ctItem = buildCurrentTagItem(ctCfg, player, currentTagId, playerTag, page, pages);
         gui.setItem(ctCfg.slot(), new GuiItem(ctItem, e -> {
@@ -253,56 +199,26 @@ public final class TagsGui {
             if (activeId == null) return;
             Tag tag = getTagsConfig(plugin).getTags().get(activeId);
             if (tag == null) return;
-            handleTagClick(plugin, clicker, tag, guiManager);
+
+            TagClearEvent clearEvent = new TagClearEvent(clicker, tag);
+            plugin.getServer().getPluginManager().callEvent(clearEvent);
+            if (clearEvent.isCancelled()) return;
+
+            getStorageManager(plugin).clearTag(clicker.getUniqueId());
+            clicker.sendMessage(getMessagesConfig(plugin).get("tag-cleared"));
+            updateNavItems(plugin, clicker, gui);
         }));
 
-        // Navigation row filler
+        // Nav filler
         if (cfg.isNavFillerEnabled()) {
-            ItemStack fillerItem = cfg.getNavFillerItem().buildPlain();
-            GuiItem filler = new GuiItem(fillerItem);
+            ItemStack filler = cfg.getNavFillerItem().buildPlain();
+            GuiItem fillerItem = new GuiItem(filler);
             for (int slot : cfg.getNavFillerSlots()) {
-                gui.setItem(slot, filler);
+                gui.setItem(slot, fillerItem);
             }
         }
-
-        // Back-to-categories button — injected after filler so it overwrites the filler slot
-        if (categoryId != null && isCategoriesEnabled(plugin)) {
-            CategoriesConfig catCfg = getCategoriesConfig(plugin);
-            GuiConfig.NavItem backCfg = catCfg.getBackButton();
-            ItemStack backItem = backCfg.item().buildPlain(
-                    "player", player.getName(), "player_tag", playerTag,
-                    "player_tag_id", playerTagId);
-            gui.setItem(backCfg.slot(), new GuiItem(backItem, e -> {
-                if (!(e.getWhoClicked() instanceof Player clicker)) return;
-                guiManager.openCategoriesGui(clicker);
-            }));
-        }
     }
 
-    /**
-     * Resolves the title for the tags GUI.
-     * When a category is specified, uses the categories config's {@code tags-title}
-     * with {@code {category_name}} replaced; otherwise uses the standard gui.yml title.
-     */
-    @NotNull
-    private static Component resolveTitle(@NotNull JavaPlugin plugin, @Nullable String categoryId) {
-        if (categoryId != null) {
-            CategoriesConfig catCfg = getCategoriesConfig(plugin);
-            String catName = catCfg.getCategories().stream()
-                    .filter(c -> c.id().equals(categoryId))
-                    .map(CategoriesConfig.Category::name)
-                    .findFirst()
-                    .orElse(categoryId);
-            String raw = catCfg.getTagsTitle().replace("{category_name}", catName);
-            return TextUtil.parse(raw);
-        }
-        return TextUtil.parse(getGuiConfig(plugin).getTitle());
-    }
-
-    /**
-     * Builds the current-tag nav item. Stamps the player's own skin when the
-     * material is {@code PLAYER_HEAD} so the head never resets to Steve.
-     */
     @NotNull
     private static ItemStack buildCurrentTagItem(
             @NotNull GuiConfig.CurrentTagItem ctCfg,
@@ -339,10 +255,6 @@ public final class TagsGui {
 
     // ── Plugin accessor shorthands ────────────────────────────────────────────
 
-    private static GuiConfig getGuiConfig(@NotNull JavaPlugin plugin) {
-        return ((gg.gianluca.giantags.GianTags) plugin).getConfigManager().getGuiConfig();
-    }
-
     private static CategoriesConfig getCategoriesConfig(@NotNull JavaPlugin plugin) {
         return ((gg.gianluca.giantags.GianTags) plugin).getConfigManager().getCategoriesConfig();
     }
@@ -351,16 +263,12 @@ public final class TagsGui {
         return ((gg.gianluca.giantags.GianTags) plugin).getStorageManager();
     }
 
-    private static gg.gianluca.giantags.config.TagsConfig getTagsConfig(@NotNull JavaPlugin plugin) {
+    private static TagsConfig getTagsConfig(@NotNull JavaPlugin plugin) {
         return ((gg.gianluca.giantags.GianTags) plugin).getConfigManager().getTagsConfig();
     }
 
     private static MessagesConfig getMessagesConfig(@NotNull JavaPlugin plugin) {
         return ((gg.gianluca.giantags.GianTags) plugin).getConfigManager().getMessagesConfig();
-    }
-
-    private static boolean isCategoriesEnabled(@NotNull JavaPlugin plugin) {
-        return ((gg.gianluca.giantags.GianTags) plugin).getConfigManager().getMainConfig().isCategoriesEnabled();
     }
 
     @NotNull

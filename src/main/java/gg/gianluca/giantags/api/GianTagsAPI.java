@@ -97,10 +97,29 @@ public interface GianTagsAPI {
     // ── GUI ──────────────────────────────────────────────────────────────────
 
     /**
-     * Opens the paginated tags GUI for the given player.
+     * Smart entry point: opens the categories GUI if categories are enabled,
+     * otherwise opens the full tags GUI.
      * Must be called on the main thread.
      */
     void openTagsGui(@NotNull Player player);
+
+    /**
+     * Always opens the full paginated tags GUI, bypassing category mode.
+     * Equivalent to {@code /tags all}. Must be called on the main thread.
+     */
+    void openTagsGuiAll(@NotNull Player player);
+
+    /**
+     * Opens the categories selection GUI regardless of the categories setting.
+     * Must be called on the main thread.
+     */
+    void openCategoriesGui(@NotNull Player player);
+
+    /**
+     * Opens the tags GUI filtered to a specific category.
+     * Must be called on the main thread.
+     */
+    void openTagsGuiForCategory(@NotNull Player player, @NotNull String categoryId);
 
     // ── Managers ──────────────────────────────────────────────────────────────
 

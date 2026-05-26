@@ -10,3 +10,8 @@ command-aliases:
   - tags
   - tag
   - mytag
+
+# Category mode: when true, /tags opens a category selection menu.
+# Players can also use /tags all to bypass the category menu and see every tag.
+categories:
+  enabled: false

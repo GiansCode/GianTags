@@ -11,6 +11,7 @@ import java.util.List;
 public final class MainConfig {
 
     private List<String> commandAliases;
+    private boolean categoriesEnabled;
 
     public MainConfig(@NotNull FileConfiguration config) {
         load(config);
@@ -21,11 +22,20 @@ public final class MainConfig {
         if (commandAliases.isEmpty()) {
             commandAliases = List.of("tags", "tag");
         }
+        categoriesEnabled = config.getBoolean("categories.enabled", false);
     }
 
     /** Aliases registered as full server commands that open the tags GUI. */
     @NotNull
     public List<String> getCommandAliases() {
         return commandAliases;
+    }
+
+    /**
+     * When {@code true}, {@code /tags} opens the category selection menu instead
+     * of showing all tags directly. Players can use {@code /tags all} to bypass.
+     */
+    public boolean isCategoriesEnabled() {
+        return categoriesEnabled;
     }
 }

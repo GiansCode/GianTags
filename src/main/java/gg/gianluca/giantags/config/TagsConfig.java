@@ -65,8 +65,21 @@ public final class TagsConfig {
         String rawTag = section.getString("tag", "<gray>[" + id + "]</gray>");
         String rawDescription = section.getString("description", "");
         int position = section.getInt("position", Integer.MAX_VALUE);
+        String category = section.getString("category");
         ConfiguredItem item = parseItem(id, section.getConfigurationSection("item"));
-        return new Tag(id, rawTag, rawDescription, position, item);
+        return new Tag(id, rawTag, rawDescription, position, category, item);
+    }
+
+    /**
+     * Returns all tags belonging to the given category, sorted by position.
+     * Tags with no category are not included.
+     */
+    @NotNull
+    public List<gg.gianluca.giantags.api.model.Tag> getTagsByCategory(@NotNull String category) {
+        return tags.values().stream()
+                .filter(t -> category.equals(t.getCategory()))
+                .sorted(java.util.Comparator.comparingInt(gg.gianluca.giantags.api.model.Tag::getPosition))
+                .toList();
     }
 
     @NotNull

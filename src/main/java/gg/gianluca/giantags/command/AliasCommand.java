@@ -42,7 +42,11 @@ public final class AliasCommand extends Command {
             return true;
         }
 
-        GianTagsProvider.get().openTagsGui(player);
+        if (args.length > 0 && args[0].equalsIgnoreCase("all")) {
+            GianTagsProvider.get().openTagsGuiAll(player);
+        } else {
+            GianTagsProvider.get().openTagsGui(player);
+        }
         return true;
     }
 
@@ -53,6 +57,9 @@ public final class AliasCommand extends Command {
             @NotNull String alias,
             @NotNull String[] args
     ) {
+        if (args.length == 1) {
+            return List.of("all");
+        }
         return List.of();
     }
 }

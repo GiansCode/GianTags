@@ -18,6 +18,10 @@
 #  glow            - Add glow effect without visible enchant (default: false)
 #  skull-texture   - Base64 skull texture (only for PLAYER_HEAD)
 #
+# ── Category ──────────────────────────────────────
+#  category        - Category identifier (must match a key in categories.yml)
+#                    Omit or leave blank for uncategorised tags.
+#
 # ── Placeholders available in name/lore ──────────
 #  {tag}           - This tag's formatted string
 #  {tag_id}        - This tag's identifier
@@ -32,6 +36,7 @@ tags:
     tag: '<gradient:#ff0000:#ff6600><bold>[Owner]</bold></gradient>'
     description: '<red>The server owner.</red>'
     position: 1
+    category: staff
     item:
       type: NETHER_STAR
       name: '<gradient:#ff0000:#ff6600><bold>[Owner]</bold></gradient> <dark_gray>Tag</dark_gray>'
@@ -53,6 +58,7 @@ tags:
     tag: '<dark_red><bold>[Admin]</bold></dark_red>'
     description: '<dark_red>Server administrator.</dark_red>'
     position: 2
+    category: staff
     item:
       type: BLAZE_ROD
       name: '<dark_red><bold>[Admin]</bold></dark_red> <dark_gray>Tag</dark_gray>'
@@ -74,6 +80,7 @@ tags:
     tag: '<blue><bold>[Mod]</bold></blue>'
     description: '<blue>Community moderator.</blue>'
     position: 3
+    category: staff
     item:
       type: IRON_SWORD
       name: '<blue><bold>[Mod]</bold></blue> <dark_gray>Tag</dark_gray>'
@@ -95,6 +102,7 @@ tags:
     tag: '<green><bold>[Helper]</bold></green>'
     description: '<green>A trusted community helper.</green>'
     position: 4
+    category: staff
     item:
       type: STICK
       name: '<green><bold>[Helper]</bold></green> <dark_gray>Tag</dark_gray>'
@@ -117,6 +125,7 @@ tags:
     tag: '<gold>[VIP]</gold>'
     description: '<yellow>A VIP supporter.</yellow>'
     position: 10
+    category: donor
     item:
       type: GOLD_INGOT
       name: '<gold>[VIP]</gold> <dark_gray>Tag</dark_gray>'
@@ -136,6 +145,7 @@ tags:
     tag: '<gold>[VIP<yellow>+</yellow>]</gold>'
     description: '<gold>An elevated VIP supporter.</gold>'
     position: 11
+    category: donor
     item:
       type: GOLD_BLOCK
       name: '<gold>[VIP<yellow>+</yellow>]</gold> <dark_gray>Tag</dark_gray>'
@@ -155,6 +165,7 @@ tags:
     tag: '<aqua>[MVP]</aqua>'
     description: '<aqua>An MVP super-supporter.</aqua>'
     position: 12
+    category: donor
     item:
       type: DIAMOND
       name: '<aqua>[MVP]</aqua> <dark_gray>Tag</dark_gray>'
@@ -176,6 +187,7 @@ tags:
     tag: '<gradient:#00c8ff:#a855f7>[MVP<light_purple>+</light_purple>]</gradient>'
     description: '<light_purple>The ultimate MVP tier.</light_purple>'
     position: 13
+    category: donor
     item:
       type: DIAMOND_BLOCK
       name: '<gradient:#00c8ff:#a855f7>[MVP<light_purple>+</light_purple>]</gradient> <dark_gray>Tag</dark_gray>'
@@ -199,6 +211,7 @@ tags:
     tag: '<gray>[Default]</gray>'
     description: '<gray>The default tag for everyone.</gray>'
     position: 20
+    category: general
     item:
       type: PAPER
       name: '<gray>[Default]</gray> <dark_gray>Tag</dark_gray>'
@@ -219,6 +232,7 @@ tags:
     tag: '<dark_green>[Member]</dark_green>'
     description: '<dark_green>A proud community member.</dark_green>'
     position: 21
+    category: general
     item:
       type: OAK_SAPLING
       name: '<dark_green>[Member]</dark_green> <dark_gray>Tag</dark_gray>'
@@ -237,6 +251,7 @@ tags:
     tag: '<dark_aqua>[Veteran]</dark_aqua>'
     description: '<dark_aqua>Been here since day one.</dark_aqua>'
     position: 22
+    category: general
     item:
       type: CLOCK
       name: '<dark_aqua>[Veteran]</dark_aqua> <dark_gray>Tag</dark_gray>'
@@ -260,6 +275,7 @@ tags:
     tag: '<white>[</white><red>Noob</red><white>]</white>'
     description: '<gray>Just started. Or chose this ironically.</gray>'
     position: 30
+    category: fun
     item:
       type: WOODEN_SWORD
       name: '<white>[</white><red>Noob</red><white>]</white> <dark_gray>Tag</dark_gray>'
@@ -278,6 +294,7 @@ tags:
     tag: '<gradient:#f7971e:#ffd200><bold>[Pro]</bold></gradient>'
     description: '<yellow>Certified professional. Self-certified.</yellow>'
     position: 31
+    category: fun
     item:
       type: GOLDEN_SWORD
       name: '<gradient:#f7971e:#ffd200><bold>[Pro]</bold></gradient> <dark_gray>Tag</dark_gray>'
@@ -301,6 +318,7 @@ tags:
     tag: '<dark_green>[</dark_green><green>Gremlin</green><dark_green>]</dark_green>'
     description: '<green>Chaotic, feral, and proud of it.</green>'
     position: 32
+    category: fun
     item:
       type: SLIME_BALL
       name: '<dark_green>[</dark_green><green>Gremlin</green><dark_green>]</dark_green> <dark_gray>Tag</dark_gray>'
@@ -319,6 +337,7 @@ tags:
     tag: '<gradient:#9b59b6:#3498db>[Gamer]</gradient>'
     description: '<light_purple>No life. All grind.</light_purple>'
     position: 33
+    category: fun
     item:
       type: COMPARATOR
       name: '<gradient:#9b59b6:#3498db>[Gamer]</gradient> <dark_gray>Tag</dark_gray>'
@@ -337,6 +356,7 @@ tags:
     tag: '<red>[</red><dark_red>Menace</dark_red><red>]</red>'
     description: '<red>A walking disaster. Feared by many.</red>'
     position: 34
+    category: fun
     item:
       type: TNT
       name: '<red>[</red><dark_red>Menace</dark_red><red>]</red> <dark_gray>Tag</dark_gray>'
@@ -357,6 +377,7 @@ tags:
     tag: '<dark_green>[Goblin]</dark_green>'
     description: '<dark_green>Hoards items. Has no chill.</dark_green>'
     position: 35
+    category: fun
     item:
       type: CHEST
       name: '<dark_green>[Goblin]</dark_green> <dark_gray>Tag</dark_gray>'
@@ -375,6 +396,7 @@ tags:
     tag: '<yellow>[</yellow><red>Clown</red><yellow>]</yellow>'
     description: '<yellow>Honk honk.</yellow>'
     position: 36
+    category: fun
     item:
       type: BELL
       name: '<yellow>[</yellow><red>Clown</red><yellow>]</yellow> <dark_gray>Tag</dark_gray>'
@@ -393,6 +415,7 @@ tags:
     tag: '<gray>[Rat]</gray>'
     description: '<gray>Someone had to say it.</gray>'
     position: 37
+    category: fun
     item:
       type: RAW_RABBIT
       name: '<gray>[Rat]</gray> <dark_gray>Tag</dark_gray>'
@@ -411,6 +434,7 @@ tags:
     tag: '<red>[</red><white>Bozo</white><red>]</red>'
     description: '<gray>An absolute bozo. Legendary status.</gray>'
     position: 38
+    category: fun
     item:
       type: PUMPKIN
       name: '<red>[</red><white>Bozo</white><red>]</red> <dark_gray>Tag</dark_gray>'
@@ -431,6 +455,7 @@ tags:
     tag: '<yellow>[Potato]</yellow>'
     description: '<yellow>Not a person. Just a potato.</yellow>'
     position: 39
+    category: fun
     item:
       type: POTATO
       name: '<yellow>[Potato]</yellow> <dark_gray>Tag</dark_gray>'
@@ -451,6 +476,7 @@ tags:
     tag: '<red>[</red><dark_red>⚔ PvP</dark_red><red>]</red>'
     description: '<red>Built for combat. Will fight for fun.</red>'
     position: 50
+    category: skill
     item:
       type: IRON_SWORD
       name: '<red>[</red><dark_red>⚔ PvP</dark_red><red>]</red> <dark_gray>Tag</dark_gray>'
@@ -474,6 +500,7 @@ tags:
     tag: '<gold>[</gold><yellow>Builder</yellow><gold>]</gold>'
     description: '<yellow>Turns dirt into dreams.</yellow>'
     position: 51
+    category: skill
     item:
       type: BRICKS
       name: '<gold>[</gold><yellow>Builder</yellow><gold>]</gold> <dark_gray>Tag</dark_gray>'
@@ -492,6 +519,7 @@ tags:
     tag: '<green>[</green><dark_green>Farmer</dark_green><green>]</green>'
     description: '<green>Wheat whisperer. Seed savant.</green>'
     position: 52
+    category: skill
     item:
       type: WHEAT
       name: '<green>[</green><dark_green>Farmer</dark_green><green>]</green> <dark_gray>Tag</dark_gray>'
@@ -512,6 +540,7 @@ tags:
     tag: '<gray>[</gray><dark_gray>⛏ Miner</dark_gray><gray>]</gray>'
     description: '<gray>Y=-58. Every day. No exceptions.</gray>'
     position: 53
+    category: skill
     item:
       type: IRON_PICKAXE
       name: '<gray>[</gray><dark_gray>⛏ Miner</dark_gray><gray>]</gray> <dark_gray>Tag</dark_gray>'
@@ -530,6 +559,7 @@ tags:
     tag: '<aqua>[</aqua><dark_aqua>Explorer</dark_aqua><aqua>]</aqua>'
     description: '<aqua>Has been everywhere. Twice.</aqua>'
     position: 54
+    category: skill
     item:
       type: COMPASS
       name: '<aqua>[</aqua><dark_aqua>Explorer</dark_aqua><aqua>]</aqua> <dark_gray>Tag</dark_gray>'
@@ -548,6 +578,7 @@ tags:
     tag: '<red>[</red><dark_red>Redstone</dark_red><red>]</red>'
     description: '<red>15,000 redstone later: it still does not work.</red>'
     position: 55
+    category: skill
     item:
       type: REDSTONE
       name: '<red>[</red><dark_red>Redstone</dark_red><red>]</red> <dark_gray>Tag</dark_gray>'
@@ -571,6 +602,7 @@ tags:
     tag: '<gold>[</gold><yellow>Trader</yellow><gold>]</gold>'
     description: '<yellow>Will sell you dirt for a diamond.</yellow>'
     position: 56
+    category: skill
     item:
       type: EMERALD
       name: '<gold>[</gold><yellow>Trader</yellow><gold>]</gold> <dark_gray>Tag</dark_gray>'
@@ -591,6 +623,7 @@ tags:
     tag: '<gradient:#f7971e:#ffd200><bold>[Legend]</bold></gradient>'
     description: '<gold>The legend. The myth. The player.</gold>'
     position: 60
+    category: personality
     item:
       type: TOTEM_OF_UNDYING
       name: '<gradient:#f7971e:#ffd200><bold>[Legend]</bold></gradient> <dark_gray>Tag</dark_gray>'
@@ -614,6 +647,7 @@ tags:
     tag: '<white>[</white><gray>Ghost</gray><white>]</white>'
     description: '<gray>Silent. Watching. Always lurking.</gray>'
     position: 61
+    category: personality
     item:
       type: SOUL_SAND
       name: '<white>[</white><gray>Ghost</gray><white>]</white> <dark_gray>Tag</dark_gray>'
@@ -632,6 +666,7 @@ tags:
     tag: '<gradient:#ff0000:#ff00ff><bold>[Chaos]</bold></gradient>'
     description: '<light_purple>Thrives on disorder. Do not invite.</light_purple>'
     position: 62
+    category: personality
     item:
       type: FIRE_CHARGE
       name: '<gradient:#ff0000:#ff00ff><bold>[Chaos]</bold></gradient> <dark_gray>Tag</dark_gray>'
@@ -655,6 +690,7 @@ tags:
     tag: '<aqua>[Chill]</aqua>'
     description: '<aqua>Unbothered. Moisturised. Thriving.</aqua>'
     position: 63
+    category: personality
     item:
       type: LIGHT_BLUE_STAINED_GLASS
       name: '<aqua>[Chill]</aqua> <dark_gray>Tag</dark_gray>'
@@ -673,6 +709,7 @@ tags:
     tag: '<dark_green>[</dark_green><green>☠ Toxic</green><dark_green>]</dark_green>'
     description: '<green>Handle with caution.</green>'
     position: 64
+    category: personality
     item:
       type: POISONOUS_POTATO
       name: '<dark_green>[</dark_green><green>☠ Toxic</green><dark_green>]</dark_green> <dark_gray>Tag</dark_gray>'
@@ -694,6 +731,7 @@ tags:
     tag: '<white>[</white><gray>🐐 GOAT</gray><white>]</white>'
     description: '<white>Greatest Of All Time.</white>'
     position: 65
+    category: personality
     item:
       type: GOAT_HORN
       name: '<white>[</white><gray>🐐 GOAT</gray><white>]</white> <dark_gray>Tag</dark_gray>'
@@ -715,6 +753,7 @@ tags:
     tag: '<blue>[</blue><aqua>Nerd</aqua><blue>]</blue>'
     description: '<aqua>Reads the wiki. Memorises the wiki. IS the wiki.</aqua>'
     position: 66
+    category: personality
     item:
       type: BOOKSHELF
       name: '<blue>[</blue><aqua>Nerd</aqua><blue>]</blue> <dark_gray>Tag</dark_gray>'
@@ -737,6 +776,7 @@ tags:
     tag: '<gradient:#ff0000:#ff7700:#ffff00:#00ff00:#0000ff:#8b00ff>[Rainbow]</gradient>'
     description: '<gradient:#ff0000:#ff7700:#ffff00:#00ff00:#0000ff:#8b00ff>Taste the rainbow.</gradient>'
     position: 70
+    category: cosmetic
     item:
       type: PINK_DYE
       name: '<gradient:#ff0000:#ff7700:#ffff00:#00ff00:#0000ff:#8b00ff>[Rainbow]</gradient> <dark_gray>Tag</dark_gray>'
@@ -758,6 +798,7 @@ tags:
     tag: '<gradient:#0f0c29:#302b63:#24243e>[Galaxy]</gradient>'
     description: '<dark_purple>Lost in space. Found in style.</dark_purple>'
     position: 71
+    category: cosmetic
     item:
       type: AMETHYST_SHARD
       name: '<gradient:#a78bfa:#818cf8>[Galaxy]</gradient> <dark_gray>Tag</dark_gray>'
@@ -781,6 +822,7 @@ tags:
     tag: '<gradient:#ff4500:#ff8c00>🔥 [Fire]</gradient>'
     description: '<red>Always burning. Never cooling down.</red>'
     position: 72
+    category: cosmetic
     item:
       type: BLAZE_POWDER
       name: '<gradient:#ff4500:#ff8c00>🔥 [Fire]</gradient> <dark_gray>Tag</dark_gray>'
@@ -804,6 +846,7 @@ tags:
     tag: '<gradient:#a8edea:#fed6e3>[❄ Ice]</gradient>'
     description: '<aqua>Frosty attitude. Icy stare.</aqua>'
     position: 73
+    category: cosmetic
     item:
       type: PACKED_ICE
       name: '<gradient:#a8edea:#fed6e3>[❄ Ice]</gradient> <dark_gray>Tag</dark_gray>'
@@ -822,6 +865,7 @@ tags:
     tag: '<dark_red>[</dark_red><red>👿 Demon</red><dark_red>]</dark_red>'
     description: '<red>Straight from the Nether.</red>'
     position: 74
+    category: cosmetic
     item:
       type: WITHER_SKELETON_SKULL
       name: '<dark_red>[</dark_red><red>👿 Demon</red><dark_red>]</dark_red> <dark_gray>Tag</dark_gray>'
@@ -843,6 +887,7 @@ tags:
     tag: '<white>[</white><yellow>✨ Angel</yellow><white>]</white>'
     description: '<yellow>Pure of heart. Suspicious of soul.</yellow>'
     position: 75
+    category: cosmetic
     item:
       type: FEATHER
       name: '<white>[</white><yellow>✨ Angel</yellow><white>]</white> <dark_gray>Tag</dark_gray>'
@@ -863,6 +908,7 @@ tags:
     tag: '<dark_gray>[</dark_gray><black>Void</black><dark_gray>]</dark_gray>'
     description: '<dark_gray>Consumed by the abyss. Cozy in here.</dark_gray>'
     position: 76
+    category: cosmetic
     item:
       type: BLACK_CONCRETE
       name: '<dark_gray>[</dark_gray><black>Void</black><dark_gray>]</dark_gray> <dark_gray>Tag</dark_gray>'
@@ -883,6 +929,7 @@ tags:
     tag: '<dark_purple>[</dark_purple><light_purple>☠ Cursed</light_purple><dark_purple>]</dark_purple>'
     description: '<light_purple>Touched by something unspeakable.</light_purple>'
     position: 77
+    category: cosmetic
     item:
       type: FERMENTED_SPIDER_EYE
       name: '<dark_purple>[</dark_purple><light_purple>☠ Cursed</light_purple><dark_purple>]</dark_purple> <dark_gray>Tag</dark_gray>'
@@ -906,6 +953,7 @@ tags:
     tag: '<gradient:#f6d365:#fda085><bold>[God]</bold></gradient>'
     description: '<gold>Ascended. Untouchable. Humble about it.</gold>'
     position: 90
+    category: special
     item:
       type: END_CRYSTAL
       name: '<gradient:#f6d365:#fda085><bold>[God]</bold></gradient> <dark_gray>Tag</dark_gray>'
@@ -929,6 +977,7 @@ tags:
     tag: '<gradient:#ffffff:#ffd700><bold>[The One]</bold></gradient>'
     description: '<white>There can only be one.</white>'
     position: 91
+    category: special
     item:
       type: DRAGON_EGG
       name: '<gradient:#ffffff:#ffd700><bold>[The One]</bold></gradient> <dark_gray>Tag</dark_gray>'
@@ -950,6 +999,7 @@ tags:
     tag: '<gradient:#11998e:#38ef7d>[⭐ Staff Pick]</gradient>'
     description: '<green>Handpicked by the team. Lucky you.</green>'
     position: 92
+    category: special
     item:
       type: EMERALD_BLOCK
       name: '<gradient:#11998e:#38ef7d>[⭐ Staff Pick]</gradient> <dark_gray>Tag</dark_gray>'
@@ -973,6 +1023,7 @@ tags:
     tag: '<gold>[</gold><yellow>OG</yellow><gold>]</gold>'
     description: '<gold>Original. Irreplaceable. Nostalgic.</gold>'
     position: 93
+    category: special
     item:
       type: MUSIC_DISC_13
       name: '<gold>[</gold><yellow>OG</yellow><gold>]</gold> <dark_gray>Tag</dark_gray>'

@@ -23,6 +23,7 @@ public final class ConfigManager {
     private final MainConfig mainConfig;
     private final TagsConfig tagsConfig;
     private final GuiConfig guiConfig;
+    private final CategoriesConfig categoriesConfig;
     private final StorageConfig storageConfig;
     private final MessagesConfig messagesConfig;
 
@@ -31,6 +32,7 @@ public final class ConfigManager {
         this.mainConfig = new MainConfig(plugin.getConfig());
         this.tagsConfig = new TagsConfig(plugin.getLogger());
         this.guiConfig = new GuiConfig(plugin.getLogger());
+        this.categoriesConfig = new CategoriesConfig(plugin.getLogger());
         this.storageConfig = new StorageConfig();
         this.messagesConfig = new MessagesConfig();
     }
@@ -59,6 +61,10 @@ public final class ConfigManager {
         FileConfiguration guiFile = loadYaml("gui.yml");
         guiConfig.load(guiFile);
 
+        // Categories
+        FileConfiguration categoriesFile = loadYaml("categories.yml");
+        categoriesConfig.load(categoriesFile);
+
         // Storage
         FileConfiguration storageFile = loadYaml("storage.yml");
         storageConfig.load(storageFile);
@@ -73,6 +79,7 @@ public final class ConfigManager {
     @NotNull public MainConfig getMainConfig() { return mainConfig; }
     @NotNull public TagsConfig getTagsConfig() { return tagsConfig; }
     @NotNull public GuiConfig getGuiConfig() { return guiConfig; }
+    @NotNull public CategoriesConfig getCategoriesConfig() { return categoriesConfig; }
     @NotNull public StorageConfig getStorageConfig() { return storageConfig; }
     @NotNull public MessagesConfig getMessagesConfig() { return messagesConfig; }
 
@@ -82,6 +89,7 @@ public final class ConfigManager {
         plugin.saveDefaultConfig();
         saveDefaultResource("tags.yml");
         saveDefaultResource("gui.yml");
+        saveDefaultResource("categories.yml");
         saveDefaultResource("storage.yml");
         saveDefaultResource("messages.yml");
     }

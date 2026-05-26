@@ -36,6 +36,7 @@ public final class GianTagsCommand {
         return Commands.literal("giantags")
                 // Running /giantags with no arguments opens the GUI for players
                 .executes(GianTagsCommand::executeRoot)
+                .then(Commands.literal("all").executes(GianTagsCommand::executeAll))
                 .then(new ListSubCommand().build())
                 .then(new SetSubCommand().build())
                 .then(removeSubCommand.build("remove"))
@@ -46,6 +47,25 @@ public final class GianTagsCommand {
     }
 
     // ── Root executor (opens GUI) ─────────────────────────────────────────────
+
+    private static int executeAll(@NotNull CommandContext<CommandSourceStack> ctx) {
+        CommandSender sender = ctx.getSource().getSender();
+
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(net.kyori.adventure.text.Component.text(
+                    "Usage: /giantags all", net.kyori.adventure.text.format.NamedTextColor.YELLOW));
+            return Command.SINGLE_SUCCESS;
+        }
+
+        if (!player.hasPermission("giantags.gui")) {
+            GianTagsAPI api = GianTagsProvider.get();
+            player.sendMessage(api.getMessagesConfig().get("no-permission"));
+            return Command.SINGLE_SUCCESS;
+        }
+
+        GianTagsProvider.get().openTagsGuiAll(player);
+        return Command.SINGLE_SUCCESS;
+    }
 
     private static int executeRoot(@NotNull CommandContext<CommandSourceStack> ctx) {
         CommandSender sender = ctx.getSource().getSender();

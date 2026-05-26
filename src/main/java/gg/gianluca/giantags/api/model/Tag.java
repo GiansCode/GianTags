@@ -16,6 +16,7 @@ public final class Tag {
     private final String rawTag;
     private final String rawDescription;
     private final int position;
+    private final @Nullable String category;
     private final ConfiguredItem item;
 
     public Tag(
@@ -23,12 +24,14 @@ public final class Tag {
             @NotNull String rawTag,
             @NotNull String rawDescription,
             int position,
+            @Nullable String category,
             @NotNull ConfiguredItem item
     ) {
         this.id = id;
         this.rawTag = rawTag;
         this.rawDescription = rawDescription;
         this.position = position;
+        this.category = category;
         this.item = item;
     }
 
@@ -65,6 +68,15 @@ public final class Tag {
     /** The display position / sort order in the GUI (lower = earlier). */
     public int getPosition() {
         return position;
+    }
+
+    /**
+     * The category identifier this tag belongs to, or {@code null} if uncategorised.
+     * Matches a key in {@code categories.yml}.
+     */
+    @Nullable
+    public String getCategory() {
+        return category;
     }
 
     /** The item configuration used when rendering this tag in the GUI. */

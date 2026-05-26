@@ -1,0 +1,244 @@
+# ┌─────────────────────────────────────────────────┐
+# │                   GianTags                      │
+# │         Categories Configuration               │
+# └─────────────────────────────────────────────────┘
+#
+# Requires `categories.enabled: true` in config.yml.
+#
+# Each category entry:
+#   name       - Display name used in titles and {category_name} placeholder
+#   position   - Sort order in the categories GUI (lower = earlier)
+#   item       - Item displayed in the categories selection GUI
+#
+# ── Placeholders available in category item name/lore ────────────────────────
+#  {category_name}  - This category's display name
+#  {tag_count}      - Number of tags available to the player in this category
+#  {player}         - Player's name
+#  {player_tag}     - Player's currently active formatted tag (or 'None')
+#  {player_tag_id}  - Player's currently active tag ID (or 'none')
+
+categories:
+
+  'staff':
+    name: 'Staff'
+    position: 1
+    item:
+      type: BLAZE_ROD
+      name: '<red><bold>Staff</bold></red>'
+      lore:
+        - '<gray>Tags for server personnel.</gray>'
+        - ''
+        - '<dark_gray>{tag_count} tag(s) available</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to browse</white></yellow>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'donor':
+    name: 'Donor'
+    position: 2
+    item:
+      type: GOLD_INGOT
+      name: '<gold><bold>Donor</bold></gold>'
+      lore:
+        - '<gray>Tags for server supporters.</gray>'
+        - ''
+        - '<dark_gray>{tag_count} tag(s) available</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to browse</white></yellow>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'general':
+    name: 'General'
+    position: 3
+    item:
+      type: OAK_SIGN
+      name: '<white><bold>General</bold></white>'
+      lore:
+        - '<gray>General tags for all players.</gray>'
+        - ''
+        - '<dark_gray>{tag_count} tag(s) available</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to browse</white></yellow>'
+
+  'fun':
+    name: 'Fun'
+    position: 4
+    item:
+      type: SLIME_BALL
+      name: '<green><bold>Fun</bold></green>'
+      lore:
+        - '<gray>Quirky and humorous tags.</gray>'
+        - ''
+        - '<dark_gray>{tag_count} tag(s) available</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to browse</white></yellow>'
+
+  'skill':
+    name: 'Skill'
+    position: 5
+    item:
+      type: IRON_SWORD
+      name: '<aqua><bold>Skill</bold></aqua>'
+      lore:
+        - '<gray>Playstyle and skill tags.</gray>'
+        - ''
+        - '<dark_gray>{tag_count} tag(s) available</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to browse</white></yellow>'
+      flags:
+        - HIDE_ATTRIBUTES
+
+  'personality':
+    name: 'Personality'
+    position: 6
+    item:
+      type: TOTEM_OF_UNDYING
+      name: '<light_purple><bold>Personality</bold></light_purple>'
+      lore:
+        - '<gray>Tags that reflect your vibe.</gray>'
+        - ''
+        - '<dark_gray>{tag_count} tag(s) available</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to browse</white></yellow>'
+
+  'cosmetic':
+    name: 'Cosmetic'
+    position: 7
+    item:
+      type: PINK_DYE
+      name: '<gradient:#ff0000:#8b00ff><bold>Cosmetic</bold></gradient>'
+      lore:
+        - '<gray>Aesthetic and visual tags.</gray>'
+        - ''
+        - '<dark_gray>{tag_count} tag(s) available</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to browse</white></yellow>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+  'special':
+    name: 'Special'
+    position: 8
+    item:
+      type: NETHER_STAR
+      name: '<gradient:#f6d365:#fda085><bold>Special</bold></gradient>'
+      lore:
+        - '<gray>Rare and exclusive tags.</gray>'
+        - ''
+        - '<dark_gray>{tag_count} tag(s) available</dark_gray>'
+        - ''
+        - '<yellow>➜ <white>Click to browse</white></yellow>'
+      glow: true
+      flags:
+        - HIDE_ENCHANTS
+
+# ── GUI Settings ──────────────────────────────────────────────────────────────
+# Settings for the categories selection screen (/tags when categories enabled)
+# and for how the tags GUI looks when browsing a specific category.
+
+gui:
+  title: '<dark_gray>✦ <gold>Categories</gold> ✦</dark_gray>'
+
+  # Total rows (1-6). Last row is the navigation row.
+  rows: 3
+
+  # Category slots per page. For 3 rows: 18 (rows 1-2) with row 3 as nav.
+  page-size: 18
+
+  # How often the GUI refreshes in ticks (20 ticks = 1 second)
+  update-interval: 10
+
+  # Filler for empty category slots
+  filler:
+    enabled: true
+    item:
+      type: BLACK_STAINED_GLASS_PANE
+      name: ' '
+
+  # Title override for the tags GUI when browsing a specific category.
+  # {category_name} is replaced with the category's display name.
+  tags-title: '<dark_gray>✦ <gold>{category_name}</gold> Tags ✦</dark_gray>'
+
+  # "Back to categories" button shown in the tags GUI when browsing a category.
+  # Place it in a nav-filler slot of gui.yml (default slot 47 is a filler slot).
+  back-button:
+    slot: 47
+    item:
+      type: ARROW
+      name: '<yellow>◀ <white>Back to Categories</white></yellow>'
+      lore:
+        - ''
+        - '<gray>Return to the categories menu</gray>'
+
+  # ── Navigation items for the categories GUI ──────────────────────────────
+  # For a 3-row GUI, slots 18-26 = the last (nav) row.
+  navigation:
+    previous-page:
+      slot: 21
+      item:
+        type: ARROW
+        name: '<yellow>◀ <white>Previous Page</white></yellow>'
+        lore:
+          - ''
+          - '<gray>Page <white>{page}</white> of <white>{pages}</white></gray>'
+          - ''
+          - '<yellow>Click to go back</yellow>'
+
+    next-page:
+      slot: 23
+      item:
+        type: ARROW
+        name: '<white>Next Page</white> <yellow>▶</yellow>'
+        lore:
+          - ''
+          - '<gray>Page <white>{page}</white> of <white>{pages}</white></gray>'
+          - ''
+          - '<yellow>Click to continue</yellow>'
+
+    close:
+      slot: 22
+      item:
+        type: BARRIER
+        name: '<red>✖ <white>Close Menu</white></red>'
+        lore:
+          - ''
+          - '<gray>Click to close the menu</gray>'
+
+    # Current tag display — same two states (has-tag / no-tag) as in gui.yml
+    current-tag:
+      slot: 18
+      has-tag:
+        type: PLAYER_HEAD
+        name: '<yellow>Current Tag</yellow>'
+        lore:
+          - '<gray>Your active tag:</gray>'
+          - ' <white>{player_tag}</white>'
+          - ''
+          - '<red>✖ <gray>Click to remove your tag</gray></red>'
+        glow: true
+        flags:
+          - HIDE_ENCHANTS
+      no-tag:
+        type: PAPER
+        name: '<yellow>Current Tag</yellow>'
+        lore:
+          - '<gray>You have no active tag.</gray>'
+          - ''
+          - '<yellow>Select a tag from the menu!</yellow>'
+
+    nav-filler:
+      enabled: true
+      slots:
+        - 19
+        - 20
+        - 24
+        - 25
+        - 26
+      item:
+        type: GRAY_STAINED_GLASS_PANE
+        name: ' '

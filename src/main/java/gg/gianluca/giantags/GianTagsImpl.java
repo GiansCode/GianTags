@@ -136,6 +136,21 @@ public final class GianTagsImpl implements GianTagsAPI {
         plugin.getGuiManager().openTagsGui(player);
     }
 
+    @Override
+    public void openTagsGuiAll(@NotNull Player player) {
+        plugin.getGuiManager().openTagsGuiAll(player);
+    }
+
+    @Override
+    public void openCategoriesGui(@NotNull Player player) {
+        plugin.getGuiManager().openCategoriesGui(player);
+    }
+
+    @Override
+    public void openTagsGuiForCategory(@NotNull Player player, @NotNull String categoryId) {
+        plugin.getGuiManager().openTagsGuiForCategory(player, categoryId);
+    }
+
     // ── Managers ──────────────────────────────────────────────────────────────
 
     @Override
