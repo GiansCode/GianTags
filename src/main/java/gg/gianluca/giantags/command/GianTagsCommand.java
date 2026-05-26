@@ -1,6 +1,7 @@
 package gg.gianluca.giantags.command;
 
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import gg.gianluca.giantags.api.GianTagsAPI;
@@ -37,6 +38,19 @@ public final class GianTagsCommand {
                 // Running /giantags with no arguments opens the GUI for players
                 .executes(GianTagsCommand::executeRoot)
                 .then(Commands.literal("all").executes(GianTagsCommand::executeAll))
+                // /giantags <category> — open tags GUI for a specific category
+                .then(Commands.argument("category", StringArgumentType.word())
+                        .suggests((ctx, builder) -> {
+                            GianTagsAPI api = GianTagsProvider.getOrNull();
+                            if (api != null) {
+                                String partial = builder.getRemainingLowerCase();
+                                for (String cat : api.getCategoryIds()) {
+                                    if (cat.startsWith(partial)) builder.suggest(cat);
+                                }
+                            }
+                            return builder.buildFuture();
+                        })
+                        .executes(GianTagsCommand::executeCategory))
                 .then(new ListSubCommand().build())
                 .then(new SetSubCommand().build())
                 .then(removeSubCommand.build("remove"))
@@ -47,6 +61,25 @@ public final class GianTagsCommand {
     }
 
     // ── Root executor (opens GUI) ─────────────────────────────────────────────
+
+    private static int executeCategory(@NotNull CommandContext<CommandSourceStack> ctx) {
+        CommandSender sender = ctx.getSource().getSender();
+
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(net.kyori.adventure.text.Component.text(
+                    "Usage: /giantags <category>", net.kyori.adventure.text.format.NamedTextColor.YELLOW));
+            return Command.SINGLE_SUCCESS;
+        }
+
+        if (!player.hasPermission("giantags.gui")) {
+            player.sendMessage(GianTagsProvider.get().getMessagesConfig().get("no-permission"));
+            return Command.SINGLE_SUCCESS;
+        }
+
+        String category = StringArgumentType.getString(ctx, "category");
+        GianTagsProvider.get().openTagsGuiForCategory(player, category);
+        return Command.SINGLE_SUCCESS;
+    }
 
     private static int executeAll(@NotNull CommandContext<CommandSourceStack> ctx) {
         CommandSender sender = ctx.getSource().getSender();

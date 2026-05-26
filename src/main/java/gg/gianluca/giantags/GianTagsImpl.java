@@ -151,6 +151,15 @@ public final class GianTagsImpl implements GianTagsAPI {
         plugin.getGuiManager().openTagsGuiForCategory(player, categoryId);
     }
 
+    @Override
+    @NotNull
+    public List<String> getCategoryIds() {
+        return plugin.getConfigManager().getCategoriesConfig().getCategories()
+                .stream()
+                .map(gg.gianluca.giantags.config.CategoriesConfig.Category::id)
+                .toList();
+    }
+
     // ── Managers ──────────────────────────────────────────────────────────────
 
     @Override

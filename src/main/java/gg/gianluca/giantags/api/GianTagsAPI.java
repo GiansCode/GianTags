@@ -121,6 +121,13 @@ public interface GianTagsAPI {
      */
     void openTagsGuiForCategory(@NotNull Player player, @NotNull String categoryId);
 
+    /**
+     * Returns the ordered list of category identifiers defined in {@code categories.yml}.
+     * Useful for command tab-completion and validation.
+     */
+    @NotNull
+    java.util.List<String> getCategoryIds();
+
     // ── Managers ──────────────────────────────────────────────────────────────
 
     @NotNull

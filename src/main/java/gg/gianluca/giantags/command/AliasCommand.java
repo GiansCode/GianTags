@@ -42,11 +42,20 @@ public final class AliasCommand extends Command {
             return true;
         }
 
-        if (args.length > 0 && args[0].equalsIgnoreCase("all")) {
-            GianTagsProvider.get().openTagsGuiAll(player);
-        } else {
-            GianTagsProvider.get().openTagsGui(player);
+        if (args.length > 0) {
+            String sub = args[0];
+            if (sub.equalsIgnoreCase("all")) {
+                GianTagsProvider.get().openTagsGuiAll(player);
+                return true;
+            }
+            // Check if it's a known category id
+            var api = GianTagsProvider.get();
+            if (api.getCategoryIds().contains(sub.toLowerCase())) {
+                api.openTagsGuiForCategory(player, sub.toLowerCase());
+                return true;
+            }
         }
+        GianTagsProvider.get().openTagsGui(player);
         return true;
     }
 
@@ -58,7 +67,16 @@ public final class AliasCommand extends Command {
             @NotNull String[] args
     ) {
         if (args.length == 1) {
-            return List.of("all");
+            List<String> completions = new java.util.ArrayList<>();
+            completions.add("all");
+            var api = GianTagsProvider.getOrNull();
+            if (api != null) {
+                completions.addAll(api.getCategoryIds());
+            }
+            String partial = args[0].toLowerCase();
+            return completions.stream()
+                    .filter(c -> c.startsWith(partial))
+                    .toList();
         }
         return List.of();
     }
